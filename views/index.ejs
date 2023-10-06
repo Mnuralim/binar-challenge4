@@ -42,8 +42,11 @@
                                 </li>
                             </ul>
                             <div class="d-flex ">
-                                <form class="d-flex" role="search">
-                                    <input class="form-control " type="search" placeholder="Search" aria-label="Search">
+                                <form action="" class="d-flex" role="search">
+                                    <input name="search" class="form-control " type="search" placeholder="Search" aria-label="Search">
+                                    <input type="text" <%= fullUrl === 'http://localhost:3000/?category=small' ? 'value=small name=category' : ''  %> class="d-none">
+                                    <input type="text" <%= fullUrl === 'http://localhost:3000/?category=medium' ? 'value=medium name=category' : ''  %> class="d-none">
+                                    <input type="text" <%= fullUrl === 'http://localhost:3000/?category=large' ? 'value=large name=category' : ''  %> class="d-none">
                                     <button class="btn btn-outline-success" type="submit">Search</button>
                                 </form>
                                 <ul class="navbar-nav dropdown__profile">
@@ -89,9 +92,9 @@
                                     <li class="breadcrumb-item"><a href="#">Cars</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">List Car</li>
                                 </ol>
-                                <!-- <div class="alert <%= (message == 'success' ? "alert-success" :"alert-dark") %> <%= message != '' ? "" : "d-none" %>" role="alert">
+                                <div class="alert <%= (message === 'Ditambah' ? "alert-success" :"alert-dark") %> <%= message != '' ? "" : "d-none" %>" role="alert">
                                     Data Berhasil <%= message %>
-                                </div> -->
+                                </div>
                             </nav>
                             <div class="d-flex justify-content-between">
                                 <h5>
@@ -108,28 +111,31 @@
                             </div>
 
                             <div class="row mt-4">
-                                    <div class="col-lg-4 my-2">
-                                        <div class="card px-2 py-4">
-                                            <img height="222px" src="" class="card-img-top text-center" style="aspect-ratio: 2/1; object-fit: contain;">
-                                            <div class="card-body">
-                                                <h5 class="card- title h5__tipe">
-                                                    mobil
-                                                </h5>
-                                                <h5 class="card-title h5__hari">Rp
-                                                    1000 / hari</h5>
-                                                <div class="row mt-3">
-                                                    <p class="p__date"><img src="images/fi_clock.png" height="18px" class="pe-1" alt=""> Updated at
-                                                        10 Februari 2023
-                                                    </p>
-                                                </div>
+                                <% cars.map((car) => { %>
+                                        <div class="col-lg-4 my-2">
+                                            <div class="card px-2 py-4">
+                                                <img height="222px" src="<%= car.image %>" class="card-img-top text-center" style="aspect-ratio: 2/1; object-fit: contain;">
+                                                <div class="card-body">
+                                                    <h5 class="card- title h5__tipe">
+                                                        <%= car.name %>
+                                                    </h5>
+                                                    <h5 class="card-title h5__hari">Rp
+                                                        <%= car.price %> / hari</h5>
+                                                    <div class="row mt-3">
+                                                        <p class="p__date"><img src="images/fi_clock.png" height="18px" class="pe-1" alt=""> Updated at
+                                                            <%= car.updatedAt %>
+                                                        </p>
+                                                    </div>
 
-                                                <div class="d-flex">
-                                                    <button class="btn btn__danger me-2 btn__modal" style="width: 143.5px; " data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="id"><img class="pe-2" src="images/fi_trash-2.png" alt="">Delete</button>
-                                                    <a class="btn btn__success" href="/edit/" style="width: 143.5px;"><img class="pe-2" src="images/fi_edit.png" alt="">Edit</a>
+                                                    <div class="d-flex">
+                                                        <button class="btn btn__danger me-2 btn__modal" style="width: 143.5px; " data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="<%= car._id %>"><img class="pe-2" src="images/fi_trash-2.png" alt="">Delete</button>
+                                                        <a class="btn btn__success" href="/edit/<%= car._id %>" style="width: 143.5px;"><img class="pe-2" src="images/fi_edit.png" alt="">Edit</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    <% }) %>
+                                   
                                     <!-- Modal -->
                                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
@@ -159,8 +165,9 @@
         modals.forEach((modal) => {
             modal.addEventListener('click', e => {
                 const id = modal.getAttribute('data-id')
-                trigger.href = `/delete/${id}`
+                trigger.href = `/cars/delete/${id}`
             })
         })
+        
     </script>
     <%- include('./layouts/script') -%>

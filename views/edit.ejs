@@ -95,7 +95,7 @@
                                 </h5>
                             </div>
 
-                            <form action="" method="post" enctype="">
+                            <form action="/cars/update/<%= car._id %>" method="post" enctype="multipart/form-data">
                                 <div class="bg__white mt-2">
                                     <div class="row">
                                         <div class="col-lg-6">
@@ -104,7 +104,7 @@
                                                     <p>Nama<i style="color: #FA2C5A;">*</i></p>
                                                 </div>
                                                 <div class="col-lg-8">
-                                                    <input name="name" type="text" class="form-control" value="" id="exampleFormControlInput1" placeholder="Avanza">
+                                                    <input name="name" type="text" class="form-control" value="<%= car.name %>" id="exampleFormControlInput1" placeholder="Avanza" >
                                                 </div>
                                             </div>
                                             <div class="row align-items-center mt-3">
@@ -112,7 +112,7 @@
                                                     <p>Sewa Per Hari<i style="color: #FA2C5A;">*</i></p>
                                                 </div>
                                                 <div class="col-lg-8">
-                                                    <input name="price" type="number" class="form-control" id="exampleFormControlInput1" value="" placeholder="Rp 0,-">
+                                                    <input name="price" type="number" class="form-control" id="exampleFormControlInput1" value="<%= car.price %>" placeholder="Rp 0,-">
                                                 </div>
                                             </div>
                                             <div class="row align-items-center mt-3">
@@ -121,7 +121,9 @@
                                                 </div>
                                                 <div class="col-lg-8">
                                                     <select name="category" class="form-select" aria-label="Default select example">
-                                                        
+                                                        <option value="small" <%= car.size === "small" ? "selected" : "" %>>Small</option>
+                                                        <option value="medium" <%= car.size === "medium" ? "selected" : "" %>>Medium</option>
+                                                        <option value="large" <%= car.size === "large" ? "selected" : "" %>>Large</option>
                                                       </select>
                                                 </div>
                                             </div>
@@ -139,8 +141,8 @@
                                 </div>
 
                                 <div class="d-flex button__down">
-                                    <button class="btn button__secondary me-3">Cancel</button>
-                                    <button class="btn button__primary me-3">Save</button>
+                                    <button type="button" onclick="window.history.back();" class="btn button__secondary me-3">Cancel</button>
+                                    <button type="submit" class="btn button__primary me-3">Save</button>
                                 </div>
                             </form>
                         </div>
