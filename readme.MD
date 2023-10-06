@@ -11,7 +11,7 @@ Saya memebuat ini bertujuan untuk pembelajaran tentang Rest Api dan CRUD
 Clone the project
 
 ```bash
-  git clone https://github.com/Mnuralim/tiktok-clone-be.git my-project
+  https://github.com/Mnuralim/binar-challenge4.git
 ```
 
 Go to the project directory
