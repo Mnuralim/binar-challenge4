@@ -16,6 +16,7 @@ const carSchema = new mongoose.Schema({
   },
   image: {
     type: String,
+    default: "https://ilsto.websites.co.in/obaju-pink/img/product-placeholder.png",
     required: [true, "image is required"],
   },
   updatedAt: {

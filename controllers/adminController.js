@@ -9,13 +9,17 @@ export const addNewCar = async (req, res) => {
 
     const date = new Date().getTime();
     const publicId = `image${date}`;
-    const uploadImage = await uploader(file.path, publicId);
+    let imageUrl;
+    if (file) {
+      const uploadImage = await uploader(file.path, publicId);
+      imageUrl = uploadImage.secure_url;
+    }
 
     const newCar = await Car.create({
       name,
       price,
       size,
-      image: uploadImage.secure_url,
+      image: imageUrl,
       updatedAt: formatDate(),
       createdAt: formatDate(),
     });
